@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.IBinder
 import android.os.Looper
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.TextView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -34,6 +36,8 @@ class MainActivity : AppCompatActivity() {
             isBound = false
         }
 
+
+
     }
 
 
@@ -51,19 +55,33 @@ class MainActivity : AppCompatActivity() {
 
         timerTextView = findViewById<TextView>(R.id.textView)
 
-        findViewById<FloatingActionButton>(R.id.startButton).setOnClickListener {
-            if (isBound) {
-                if (timerBinder.isRunning) timerBinder.pause() else timerBinder.start(20)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.timermenu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_start -> {
+                if (isBound) {
+                    if (timerBinder.isRunning) timerBinder.pause() else timerBinder.start(20)
+                }
+                true
             }
-        }
-        
-        findViewById<FloatingActionButton>(R.id.stopButton).setOnClickListener {
-            if (timerBinder.isRunning){
-                timerBinder.stop()
-                timerTextView.text = 0.toString()
+            R.id.action_stop -> {
+                if (isBound && timerBinder.isRunning) {
+                    timerBinder.stop()
+                    timerTextView.text = 0.toString()
+                }
+                true
             }
+            else -> super.onOptionsItemSelected(item)
         }
     }
+
+
 
     override fun onDestroy() {
         unbindService(serviceConnection)
