@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Button
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/startButton"
         android:layout_width="100dp"
         android:layout_height="53dp"
@@ -16,7 +16,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/stopButton"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/stopButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

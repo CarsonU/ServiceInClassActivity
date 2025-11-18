@@ -9,6 +9,7 @@ import android.os.IBinder
 import android.os.Looper
 import android.widget.Button
 import android.widget.TextView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.util.logging.Handler
 import kotlin.concurrent.timer
 
@@ -50,13 +51,13 @@ class MainActivity : AppCompatActivity() {
 
         timerTextView = findViewById<TextView>(R.id.textView)
 
-        findViewById<Button>(R.id.startButton).setOnClickListener {
+        findViewById<FloatingActionButton>(R.id.startButton).setOnClickListener {
             if (isBound) {
                 if (timerBinder.isRunning) timerBinder.pause() else timerBinder.start(20)
             }
         }
         
-        findViewById<Button>(R.id.stopButton).setOnClickListener {
+        findViewById<FloatingActionButton>(R.id.stopButton).setOnClickListener {
             if (timerBinder.isRunning){
                 timerBinder.stop()
                 timerTextView.text = 0.toString()
